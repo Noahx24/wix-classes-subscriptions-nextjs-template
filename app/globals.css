@@ -4,9 +4,18 @@
 
 @font-face {
   font-display: block;
-  font-family:DINNeuzeitGroteskLTW01-_812426;
-  src:url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/b41558bd-2862-46c0-abf7-536d2542fa26.eot?#iefix");
-  src:url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/b41558bd-2862-46c0-abf7-536d2542fa26.eot?#iefix") format("eot"),url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/5cee8d6e-89ad-4d8c-a0ac-584d316b15ae.woff2") format("woff2"),url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/388ef902-2c31-4818-abb1-a40dcd81f6d6.woff") format("woff"),url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/29c60077-2614-4061-aa8d-5bcfdf7354bb.ttf") format("truetype"),url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/76250d27-b353-4f3b-90c6-0ff635fabaab.svg#76250d27-b353-4f3b-90c6-0ff635fabaab") format("svg");
+  font-family: DINNeuzeitGroteskLTW01-_812426;
+  src: url('//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/b41558bd-2862-46c0-abf7-536d2542fa26.eot?#iefix');
+  src: url('//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/b41558bd-2862-46c0-abf7-536d2542fa26.eot?#iefix')
+      format('eot'),
+    url('//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/5cee8d6e-89ad-4d8c-a0ac-584d316b15ae.woff2')
+      format('woff2'),
+    url('//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/388ef902-2c31-4818-abb1-a40dcd81f6d6.woff')
+      format('woff'),
+    url('//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/29c60077-2614-4061-aa8d-5bcfdf7354bb.ttf')
+      format('truetype'),
+    url('//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/76250d27-b353-4f3b-90c6-0ff635fabaab.svg#76250d27-b353-4f3b-90c6-0ff635fabaab')
+      format('svg');
 }
 
 @font-face {
@@ -14,8 +23,12 @@
   font-family: 'Open Sans Condensed';
   font-style: normal;
   font-weight: 300;
-  src: local('Open Sans Condensed Light'), local('OpenSansCondensed-Light'), url("//static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff2/s/opensanscondensed/v14/z7NFdQDnbTkabZAIOl9il_O6KJj73e7Ff1GhDuXMR7eS2Ao.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: local('Open Sans Condensed Light'), local('OpenSansCondensed-Light'),
+    url('//static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff2/s/opensanscondensed/v14/z7NFdQDnbTkabZAIOl9il_O6KJj73e7Ff1GhDuXMR7eS2Ao.woff2')
+      format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
 
 @layer components {
@@ -27,7 +40,8 @@
     left: calc(50% - 2px);
   }
 
-  .btn-main, .btn-secondary {
+  .btn-main,
+  .btn-secondary {
     @apply cursor-pointer;
     @apply border-none;
     @apply text-sm;
@@ -56,14 +70,16 @@
     @apply hover:text-white;
   }
 
-  .btn-main[disabled], .btn-secondary[disabled] {
+  .btn-main[disabled],
+  .btn-secondary[disabled] {
     @apply hover:text-white;
     @apply bg-gray-400;
     @apply border-gray-400;
     @apply hover:bg-gray-400;
   }
 
-  h1, .title {
+  h1,
+  .title {
     @apply font-din-neu;
     @apply text-5xl;
     @apply md:text-7xl;
@@ -102,7 +118,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font: normal normal normal 18px/1.4em DINNeuzeitGroteskLTW01-_812426, sans-serif;
+  font: normal normal normal 18px/1.4em DINNeuzeitGroteskLTW01-_812426,
+    sans-serif;
   @apply bg-gray-c1;
   @apply text-white;
   @apply antialiased;

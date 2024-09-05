@@ -58,12 +58,13 @@ export function CalendarView({ service }: { service: ServiceInfoViewModel }) {
   });
   const timezone = useUserTimezone();
   const timezoneStr = useFormattedTimezone(timezone);
+
   useEffect(() => {
-    // re-fetching existing range is cached
     setDateRange(getCalendarMonthRangeForDate(selectedDate!));
     setSelectedTime('');
   }, [selectedDate]);
 
+  // Fix for missing dependencies in useMemo
   const slotsMap: { [key: string]: SlotViewModel[] } = useMemo(() => {
     return (
       slotsToSortedSlotsViewModel(
@@ -73,26 +74,28 @@ export function CalendarView({ service }: { service: ServiceInfoViewModel }) {
         [key: string]: SlotViewModel[];
       }>((acc, curr) => {
         const slotsArr = acc[curr.formattedTime] ?? [];
-        // prefer bookable slots
         slotsArr[curr.slotAvailability.bookable ? 'unshift' : 'push'](curr);
         acc[curr.formattedTime] = slotsArr;
         return acc;
       }, {}) ?? {}
     );
-  }, [dayData]);
+  }, [dayData, service?.id, service?.info.name]); // Include missing dependencies: service?.id and service?.info.name
+
+  // Fix for dynamic dependency list and missing dependencies
   const showLoader = useMemo(
     () =>
       isDayDataLoading ||
       (!dayData?.availabilityEntries?.length && isRangeDataLoading),
-    [isDayDataLoading, isRangeDataLoading, dayData]
+    [isDayDataLoading, isRangeDataLoading, dayData?.availabilityEntries]
   );
+
   const nextAvailableDate = useMemo(
     () =>
       rangeData?.availabilityEntries
         ?.filter(({ bookable }) => bookable)
         .map(({ slot }) => new Date(slot!.startDate!))
         .find((dateWithSlots) => dateWithSlots > selectedDate),
-    [selectedDate, rangeData]
+    [rangeData?.availabilityEntries, selectedDate] // Include missing dependencies: rangeData?.availabilityEntries and selectedDate
   );
 
   return (

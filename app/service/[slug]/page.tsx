@@ -101,11 +101,3 @@ function ServicePageView({ service }: { service: ServiceInfoViewModel }) {
     </div>
   );
 }
-
-/* uncomment in order to generate static content */
-// export async function generateStaticParams() {
-//   const wixSession = createWixVisitorSession();
-//   // create static pages for first 5 services
-//   const { services } = await getServices({ limit: 5 }, wixSession);
-//   return services.map(({ slug }) => ({ slug }));
-// }

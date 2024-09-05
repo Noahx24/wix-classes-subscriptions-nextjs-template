@@ -1,30 +1,32 @@
 import './page.css';
 import Image from 'next/image';
 import {
-  GalleryItem,
+  GalleryItem as GalleryItemType,
   galleryItems,
 } from '@app/model/gallery/fitness-instructor';
 import ScrollIntoView from '@app/components/ScrollIntoView/ScrollIntoView';
 import testIds from '@app/utils/test-ids';
 
-const TrainingOptionSelection = ({
-  text,
-  className,
-  bgImageSrc,
-  href,
-}: {
+type TrainingOptionSelectionProps = {
   text: string;
   bgImageSrc: string;
   href: string;
   className?: string;
-}) => (
+};
+
+const TrainingOptionSelection = ({
+  text,
+  className = '',
+  bgImageSrc,
+  href,
+}: TrainingOptionSelectionProps) => (
   <a
     className={`flex-1 aspect-[4/3] relative flex justify-center ${className}`}
     href={href}
   >
-    <div className={`absolute-full bg-cover ${bgImageSrc}`}></div>
-    <div className="absolute-full h-full opacity-0 hover:opacity-50 bg-highlight"></div>
-    <div className="flex align-middle justify-center flex-col gap-5 h-full w-full max-w-[490px]">
+    <div className={`absolute inset-0 bg-cover ${bgImageSrc}`}></div>
+    <div className="absolute inset-0 h-full opacity-0 hover:opacity-50 bg-highlight"></div>
+    <div className="flex flex-col items-center justify-center h-full w-full max-w-[490px]">
       <h3 className="z-10 uppercase text-3xl tracking-[.3em]">{text}</h3>
       <div className="mx-auto">
         <Image
@@ -39,13 +41,12 @@ const TrainingOptionSelection = ({
   </a>
 );
 
-const AchievementItem = ({
-  title,
-  tagline,
-}: {
+type AchievementItemProps = {
   title: string;
   tagline: string;
-}) => (
+};
+
+const AchievementItem = ({ title, tagline }: AchievementItemProps) => (
   <li>
     <h4 className="title mb-5">{title}</h4>
     <div className="mb-5 bg-black h-px w-28"></div>
@@ -53,14 +54,16 @@ const AchievementItem = ({
   </li>
 );
 
+type GalleryItemProps = {
+  item: GalleryItemType;
+};
+
 const GalleryItem = ({
   item: { title, tagline, imgSrc, id },
-}: {
-  item: GalleryItem;
-}) => (
+}: GalleryItemProps) => (
   <li className="aspect-video relative">
     <Image src={imgSrc} alt={title} fill />
-    <div className="absolute-full opacity-0 hover:opacity-70 bg-white p-8 flex flex-col justify-between text-black">
+    <div className="absolute inset-0 opacity-0 hover:opacity-70 bg-white p-8 flex flex-col justify-between text-black">
       <div className="text-center">
         <h4 className="text-2xl pt-4 pb-2">{title}</h4>
         <p className="font-open-sans-condensed">{tagline}</p>
@@ -87,7 +90,7 @@ const GalleryItem = ({
   </li>
 );
 
-export default async function Home() {
+export default function Home() {
   return (
     <div>
       <div
@@ -142,24 +145,31 @@ export default async function Home() {
             </h2>
             <section className="font-open-sans-condensed text-base text-stone-300 tracking-wider">
               <p className="py-3">
-                {`Hi, I’m Joey Dixon and I’m a boxing coach with 15 years of boxing experience and 9 intercontinental cruiserweight titles. 
-                I’ve trained many successful boxers at national and international levels. I love teaching people how to box like a pro,
-                whether they are beginners or advanced fighters.
-                `}
+                Hi, I’m Joey Dixon and I’m a boxing coach with 15 years of
+                boxing experience and 9 intercontinental cruiserweight titles.
+                I’ve trained many successful boxers at national and
+                international levels. I love teaching people how to box like a
+                pro, whether they are beginners or advanced fighters.
               </p>
               <p className="py-3">
-                {`To me, boxing is not only a sport, but also a way of life.
-                It teaches you discipline, resilience, confidence, and self-defense. It also keeps you fit, healthy, and mentally sharp.
-                That’s why I created this business to share my knowledge and skills with you.`}
+                To me, boxing is not only a sport, but also a way of life. It
+                teaches you discipline, resilience, confidence, and
+                self-defense. It also keeps you fit, healthy, and mentally
+                sharp. That’s why I created this business to share my knowledge
+                and skills with you.
               </p>
               <p className="py-3">
-                {`I have a friendly and supportive approach that will make you feel comfortable and motivated.
-                I also have a wealth of experience and expertise that will make you learn faster and better.
-                No matter what your age, level, or background, I can help you become the best boxer you can be.`}
+                I have a friendly and supportive approach that will make you
+                feel comfortable and motivated. I also have a wealth of
+                experience and expertise that will make you learn faster and
+                better. No matter what your age, level, or background, I can
+                help you become the best boxer you can be.
               </p>
               <p className="py-3">
-                {`If you are interested in working with me or learning more about me, please feel free to contact me or browse through my website.
-                I look forward to hearing from you and helping you on your boxing journey.`}
+                If you are interested in working with me or learning more about
+                me, please feel free to contact me or browse through my website.
+                I look forward to hearing from you and helping you on your
+                boxing journey.
               </p>
             </section>
             <section className="mt-5">
@@ -243,10 +253,7 @@ export default async function Home() {
             <h3 className="text-3xl uppercase tracking-[.4em] pt-7">
               Start Training Today
             </h3>
-            <a
-              className="btn-secondary px-10 text-lg px-7"
-              href="/classes-schedule"
-            >
+            <a className="btn-secondary px-10 text-lg" href="/classes-schedule">
               Book a Session
             </a>
           </div>
@@ -262,8 +269,10 @@ export default async function Home() {
         <div className="mx-auto max-w-md px-2">
           <h2 className="title tracking-widest">THE STUDIO</h2>
           <div className="pt-7 font-open-sans-condensed text-lg text-stone-300">
-            {`We train in a modern and spacious facility, conveniently located in the heart of San Francisco.
-            We have the equipment, facilities and expertise to take on clients of all ages and experience levels. Come by and check us out!`}
+            We train in a modern and spacious facility, conveniently located in
+            the heart of San Francisco. We have the equipment, facilities, and
+            expertise to take on clients of all ages and experience levels. Come
+            by and check us out!
           </div>
           <section className="text-center uppercase pt-24 text-stone-200">
             <h4 className="text-3xl tracking-[.4em]">Address</h4>
