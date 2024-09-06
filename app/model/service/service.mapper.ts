@@ -13,33 +13,43 @@ export function mapServiceInfo(service?: services.Service) {
   if (!service) {
     return null;
   }
-  let mainMedia = service?.media?.mainMedia ?? service?.media?.items?.[0];
-  let coverMedia = service?.media?.coverMedia ?? service?.media?.items?.[0];
-  let otherMediaItems = service?.media?.items?.filter((item) => !!item) as
+
+  // Safely access media properties
+  const mainMedia = service?.media?.mainMedia ?? service?.media?.items?.[0];
+  const coverMedia = service?.media?.coverMedia ?? service?.media?.items?.[0];
+  const otherMediaItems = service?.media?.items?.filter((item) => !!item) as
     | ServiceImage[]
     | undefined;
-  const { name, description, tagLine, _id: id } = service;
-  const serviceDuration = getDuration(service);
 
+  // Safely destructure service properties
+  const { name, description, tagLine, _id: id } = service;
+
+  // Get duration and format it
+  const serviceDuration = getDuration(service);
+  const formattedDuration = serviceDuration
+    ? formatDuration(serviceDuration)
+    : '';
+
+  // Map service info safely
   return {
-    id: id!,
-    scheduleId: service?.schedule?._id,
+    id: id ?? '', // Ensure 'id' is defined or default to an empty string
+    scheduleId: service?.schedule?._id ?? null, // Safely access schedule id
     info: {
-      name: name!,
-      description,
-      tagLine,
+      name: name ?? 'Unknown', // Provide a fallback for missing name
+      description: description ?? null, // Ensure 'description' is null if not available
+      tagLine: tagLine ?? null, // Ensure 'tagLine' is null if not available
       media: {
-        mainMedia,
-        otherMediaItems,
-        coverMedia,
+        mainMedia: mainMedia ?? null, // Safely handle missing media
+        otherMediaItems: otherMediaItems ?? [],
+        coverMedia: coverMedia ?? null,
       },
-      formattedDuration: serviceDuration ? formatDuration(serviceDuration) : '',
+      formattedDuration: formattedDuration,
     },
-    slug: service!.mainSlug!.name,
-    type: service!.type!,
-    categoryId: service!.category!._id!,
-    categoryName: service!.category!.name!,
-    payment: mapServicePayment(service),
+    slug: service?.mainSlug?.name ?? '', // Safely access slug name
+    type: service?.type ?? 'Unknown', // Provide a fallback for missing type
+    categoryId: service?.category?._id ?? '', // Safely access category ID
+    categoryName: service?.category?.name ?? 'Unknown', // Provide a fallback for missing category name
+    payment: mapServicePayment(service), // Map payment info, assuming it's safe
   };
 }
 

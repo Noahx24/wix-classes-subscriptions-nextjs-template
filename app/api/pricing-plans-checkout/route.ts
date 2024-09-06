@@ -1,5 +1,4 @@
 import { createRedirectCallbacks } from '@app/model/redirects/redirect.utils';
-
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerWixClient } from '@app/model/auth/wix-client.server';
 import { getRequestUrl } from '@app/model/server-utils';
